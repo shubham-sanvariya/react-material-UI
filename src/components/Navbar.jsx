@@ -1,6 +1,6 @@
 import { Mail, Notifications, Pets } from '@mui/icons-material';
-import { AppBar, Avatar, Badge, Box, InputBase, Toolbar, Typography, styled } from '@mui/material'
-import React from 'react'
+import { AppBar, Avatar, Badge, Box, InputBase, Menu, MenuItem, Toolbar, Typography, styled } from '@mui/material'
+import React, { useState } from 'react'
 
 const StyledToolbar = styled(Toolbar)({
     display: "flex",
@@ -29,12 +29,13 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+    const [open, setOpen] = useState(false);
   return (
     <AppBar position='sticky'>
         <StyledToolbar>
             <Typography variant='h6'
              sx={{ display: { xs: "none", sm: "block" } }}>
-                NavBar
+                Shubham
             </Typography>
             <Pets sx={{ display: { xs: "block", sm: "none" } }}/>
             <Search><InputBase placeholder='search...'/></Search>
@@ -45,15 +46,38 @@ const Navbar = () => {
                 <Badge badgeContent={4} color='error'>
                     <Notifications />
                 </Badge>
-                  <Avatar sx={{width : 30, height : 30}} src='https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'/>
+                  <Avatar
+                   sx={{width : 30, height : 30}}
+                   src='https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+                   onClick={e=>setOpen(true)}
+                   />
             </Icons>
-            <UserBox>
+            <UserBox onClick={e=>setOpen(true)}>
                 <Avatar
                 sx={{ width: 30, height: 30 }}
-                src='https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' />
+                src='https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+                />
                 <Typography variant='span'>John</Typography>
             </UserBox>
         </StyledToolbar>
+          <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              open={open}
+              onClose={e=>setOpen(false)}
+              anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+              }}
+              transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+              }}
+          >
+              <MenuItem>Profile</MenuItem>
+              <MenuItem>My account</MenuItem>
+              <MenuItem>Logout</MenuItem>
+          </Menu>
     </AppBar>
   )
 }
